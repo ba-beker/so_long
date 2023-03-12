@@ -6,7 +6,7 @@
 /*   By: mobabeke <mobabeke@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:34:17 by mobabeke          #+#    #+#             */
-/*   Updated: 2023/01/15 21:56:30 by mobabeke         ###   ########.fr       */
+/*   Updated: 2023/03/11 17:37:37 by mobabeke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,3 @@ int	ft_converto_x(va_list arg)
 	}
 	return (ft_converto_hex(i));
 }
-

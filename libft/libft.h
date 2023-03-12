@@ -6,7 +6,7 @@
 /*   By: mobabeke <mobabeke@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 15:21:17 by mobabeke          #+#    #+#             */
-/*   Updated: 2023/02/25 20:54:56 by mobabeke         ###   ########.fr       */
+/*   Updated: 2023/03/11 17:36:55 by mobabeke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,26 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int ch);
 int		ft_toupper(int ch);
-int     gnl(int fd, char **str);
+int		gnl(int fd, char **str);
 // get_next_line
 char	*new_line(const char *str, int c);
 char	*get_next_line(int fd);
 // ft_printf
-int     ft_check_format(va_list arg, char c);
-int     ft_converto_c(va_list arg);
-int     ft_converto_s(va_list arg);
-int     ft_converto_di(va_list arg);
-int     ft_converto_x(va_list arg);
+int		ft_check_format(va_list arg, char c);
+int		ft_converto_c(va_list arg);
+int		ft_converto_s(va_list arg);
+int		ft_converto_di(va_list arg);
+int		ft_converto_x(va_list arg);
 void	ft_putstr_fd(char *s, int fd);
-int     ft_converto_hex(size_t n);
-int     ft_converto_cx(va_list arg);
-int     ft_converto_u(va_list arg);
-int     ft_converto_p(va_list arg);
-int     ft_converto_hexupper(unsigned int n);
-int     ft_printf(const char *str, ...);
-int     ft_intlen(int x);
+int		ft_converto_hex(size_t n);
+int		ft_converto_cx(va_list arg);
+int		ft_converto_u(va_list arg);
+int		ft_converto_p(va_list arg);
+int		ft_converto_hexupper(unsigned int n);
+int		ft_printf(const char *str, ...);
+int		ft_intlen(int x);
 void	ft_unputnbr_fd(unsigned int n, int fd);
-int     ft_unintlen(unsigned int i);
-int     printpers(char i);
+int		ft_unintlen(unsigned int i);
+int		printpers(char i);
 
 #endif

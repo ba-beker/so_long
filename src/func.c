@@ -1,25 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   func.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mobabeke <mobabeke@student.42wolfsburg.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/11 18:29:47 by mobabeke          #+#    #+#             */
+/*   Updated: 2023/03/11 18:30:53 by mobabeke         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/so_long.h"
 
-int is_same_char(char *str)
+int	is_same_char(char *str)
 {
-    int     i;
-    char    buff;
+	int		i;
+	char	buff;
 
-    i = 0;
-    buff = '1';
-    if (str == NULL)
-        return (-1);
-    while (str[i])
-    {
-        if (str[i] != buff && str[i] != '\n')
-            return (0);
-        i++;
-    }
-    return (1);
+	i = 0;
+	buff = '1';
+	if (str == NULL)
+		return (-1);
+	while (str[i])
+	{
+		if (str[i] != buff && str[i] != '\n')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
-void    *output_error(char *str)
+void	*output_error(char *str)
 {
-    write(2, str, ft_strlen(str));
-    return (0);
+	write(2, str, ft_strlen(str));
+	return (0);
 }

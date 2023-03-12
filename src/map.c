@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mobabeke <mobabeke@student.42wolfsburg.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/11 18:39:07 by mobabeke          #+#    #+#             */
+/*   Updated: 2023/03/11 18:48:44 by mobabeke         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/so_long.h"
 
 char	*get_map(int fd)
@@ -27,68 +39,70 @@ char	*get_map(int fd)
 	output_error("Error\nWrong lecture map\n");
 	return (NULL);
 }
-void    *free_map(t_data *data)
-{
-    int i;
 
-    i = 0;
-    while (data->map[i] != NULL)
-    {
-        free(data->map[i]);
-        i++;
-    }
-    free(data->map);
-    data->map = NULL;
-    return (0);
-}
-char    **map_parse(int fd, t_data *data)
+void	*free_map(t_data *data)
 {
-    int i;
+	int	i;
 
-    i = 1;
-    data->map = ft_split(get_map(fd), '\n');
-    count_item(data);
-    if (!(check_forma(data->map)))
-        return (free_map(data));
-    if (!(wall_line(data->map[0], data->content.wall)))
-        return (free_map(data));
-    while(data->map[i] != NULL)
-    {
-        if (!(wall_column(data->map[i], data->content.wall, data)))
-            return (free_map(data));
-        else if (!(check_inside(data->map[i], &(data->content))))
-            return(free_map(data));
-        i++;
-    }
-    data->height= i;
-    if (!(wall_line(data->map[i - 1], data->content.wall)))
-        return (free_map(data));
-    return(data->map);
+	i = 0;
+	while (data->map[i] != NULL)
+	{
+		free(data->map[i]);
+		i++;
+	}
+	free(data->map);
+	data->map = NULL;
+	return (0);
 }
 
-char    **map_core(char **str, t_data *data)
+char	**map_parse(int fd, t_data *data)
 {
-    int fd;
+	int	i;
 
-    fd = 0;
-    data->map = NULL;
-    if (sstrchr(str[1], ".ber") == 0)
-        return (output_error("Error: No correct format map founded\n"));
-    else
-    {
-        fd = open(str[1], O_RDONLY);
-        if (fd > 0)
-            data->map = map_parse(fd, data);
-        else
-            return (output_error("Errror: failed to open file\n"));
-        if ((data->content.count_c == 0 || data->content.count_e != 1
-                || data->content.count_p != 1) && data->map != NULL)
-        {
-            free_map(data);
-            return (output_error("Error: 1 Player/Exit and at least 1 object"));
-        }
-    }
-    return (data->map);
+	i = 1;
+	data->map = ft_split(get_map(fd), '\n');
+	count_item(data);
+	if (!(check_forma(data->map)))
+		return (free_map(data));
+	if (!(wall_line(data->map[0], data->content.wall)))
+		return (free_map(data));
+	while (data->map[i] != NULL)
+	{
+		if (!(wall_column(data->map[i], data->content.wall, data)))
+			return (free_map(data));
+		else if (!(check_inside(data->map[i], &(data->content))))
+			return (free_map(data));
+		i++;
+	}
+	data->height = i;
+	if (!(wall_line(data->map[i - 1], data->content.wall)))
+		return (free_map(data));
+	return (data->map);
+}
+
+char	**map_core(char **str, t_data *data)
+{
+	int	fd;
+
+	fd = 0;
+	data->map = NULL;
+	if (sstrchr(str[1], ".ber") == 0)
+		return (output_error("Error: No correct format map founded\n"));
+	else
+	{
+		fd = open(str[1], O_RDONLY);
+		if (fd > 0)
+			data->map = map_parse(fd, data);
+		else
+			return (output_error("Errror: failed to open file\n"));
+		if ((data->content.count_c == 0 || data->content.count_e != 1
+				|| data->content.count_p != 1) && data->map != NULL)
+		{
+			free_map(data);
+			return (output_error("Error: 1 Player/Exit and at least 1 object"));
+		}
+	}
+	return (data->map);
 }
 
 int	sstrchr(char *str, char *cmp)
