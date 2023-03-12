@@ -6,11 +6,28 @@
 /*   By: mobabeke <mobabeke@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 18:50:19 by mobabeke          #+#    #+#             */
-/*   Updated: 2023/03/11 22:18:36 by mobabeke         ###   ########.fr       */
+/*   Updated: 2023/03/12 14:48:23 by mobabeke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+void	rend(t_data *data)
+{
+	data->mlx_win = mlx_new_window(data->mlx_ptr,
+			(data->width * data->image.width),
+			(data->height * data->image.height), "so_long");
+	if (data->mlx_win == NULL)
+	{
+		free(data->mlx_ptr);
+		return ;
+	}
+	mlx_loop_hook(data->mlx_ptr, &render, data);
+	mlx_hook(data->mlx_win, KeyRelease, KeyReleaseMask, &pressed_key, data);
+	mlx_hook(data->mlx_win, 17, 0, &end, data);
+	mlx_loop(data->mlx_ptr);
+	end(data);
+}
 
 void	r_background(t_data *data)
 {
@@ -67,23 +84,6 @@ int	render(t_data *data)
 	r_background(data);
 	r_other(data);
 	return (0);
-}
-
-void	rend(t_data *data)
-{
-	data->mlx_win = mlx_new_window(data->mlx_ptr,
-			(data->width * data->image.width),
-			(data->height * data->image.height), "so_long");
-	if (data->mlx_win == NULL)
-	{
-		free(data->mlx_ptr);
-		return ;
-	}
-	mlx_loop_hook(data->mlx_ptr, &render, data);
-	mlx_hook(data->mlx_win, KeyRelease, KeyReleaseMask, &pressed_key, data);
-	mlx_hook(data->mlx_win, 17, 0, &end, data);
-	mlx_loop(data->mlx_ptr);
-	end(data);
 }
 
 void	p_image(t_data *data, void *image, int x, int y)

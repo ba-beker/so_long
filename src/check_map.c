@@ -6,11 +6,37 @@
 /*   By: mobabeke <mobabeke@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 18:27:09 by mobabeke          #+#    #+#             */
-/*   Updated: 2023/03/11 18:27:27 by mobabeke         ###   ########.fr       */
+/*   Updated: 2023/03/12 14:42:06 by mobabeke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+int	check_forma(char **map)
+{
+	int	x;
+	int	y;
+	int	c;
+
+	x = 0;
+	y = 0;
+	c = 0;
+	while (map[0][c])
+		c++;
+	while (map[y] != NULL)
+	{
+		while (map[y][x])
+		x++;
+		if (x != c)
+		{
+			output_error("Error: the map is neither a square nor a rectangle");
+			return (0);
+		}
+		x = 0;
+		y++;
+	}
+	return (1);
+}
 
 int	wall_column(char *line, char wall, t_data *data)
 {
@@ -91,30 +117,4 @@ void	count_item(t_data *data)
 		y = 0;
 		x++;
 	}
-}
-
-int	check_forma(char **map)
-{
-	int	x;
-	int	y;
-	int	c;
-
-	x = 0;
-	y = 0;
-	c = 0;
-	while (map[0][c])
-		c++;
-	while (map[y] != NULL)
-	{
-		while (map[y][x])
-		x++;
-		if (x != c)
-		{
-			output_error("Error: the map is neither a square nor a rectangle");
-			return (0);
-		}
-		x = 0;
-		y++;
-	}
-	return (1);
 }

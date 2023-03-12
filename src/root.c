@@ -6,11 +6,37 @@
 /*   By: mobabeke <mobabeke@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 07:40:45 by mobabeke          #+#    #+#             */
-/*   Updated: 2023/03/12 07:46:38 by mobabeke         ###   ########.fr       */
+/*   Updated: 2023/03/12 14:49:31 by mobabeke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+int	main(int argc, char **argv)
+{
+	t_data	data;
+
+	if (argc != 2)
+	{
+		output_error("Error\nThis programe take 1 argument .ber\n ");
+		return (0);
+	}
+	else
+	{
+		data.count = 0;
+		data.mlx_ptr = mlx_init();
+		init_content(&(data.content));
+		data.map = map_core(argv, &data);
+		if (data.map != NULL)
+		{
+			init_image(&data);
+			rend(&data);
+		}
+		else
+			end(&data);
+	}
+	return (1);
+}
 
 int	count_pix(t_data *data)
 {
@@ -73,30 +99,4 @@ int	pressed_key(int k_system, t_data *data)
 	if (k_system == XK_s)
 		r_buttom(data);
 	return (0);
-}
-
-int	main(int argc, char **argv)
-{
-	t_data	data;
-
-	if (argc != 2)
-	{
-		output_error("Error\nThis programe take 1 argument .ber\n ");
-		return (0);
-	}
-	else
-	{
-		data.count = 0;
-		data.mlx_ptr = mlx_init();
-		init_content(&(data.content));
-		data.map = map_core(argv, &data);
-		if (data.map != NULL)
-		{
-			init_image(&data);
-			rend(&data);
-		}
-		else
-			end(&data);
-	}
-	return (1);
 }

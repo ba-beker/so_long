@@ -6,11 +6,33 @@
 /*   By: mobabeke <mobabeke@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 18:39:07 by mobabeke          #+#    #+#             */
-/*   Updated: 2023/03/11 18:48:44 by mobabeke         ###   ########.fr       */
+/*   Updated: 2023/03/12 14:48:44 by mobabeke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+int	sstrchr(char *str, char *cmp)
+{
+	int		i;
+	int		y;
+
+	i = 0;
+	y = 0;
+	if (cmp[y] == '\0' && str[i] == '\0')
+		return (1);
+	while (str[i])
+	{
+		while (str[i + y] == cmp[y] && str[i + y] && cmp[y])
+			y++;
+		if (cmp[y] == '\0' && str[i + y] == '\0')
+			return (1);
+		else
+			y = 0;
+		i++;
+	}
+	return (0);
+}
 
 char	*get_map(int fd)
 {
@@ -103,26 +125,4 @@ char	**map_core(char **str, t_data *data)
 		}
 	}
 	return (data->map);
-}
-
-int	sstrchr(char *str, char *cmp)
-{
-	int		i;
-	int		y;
-
-	i = 0;
-	y = 0;
-	if (cmp[y] == '\0' && str[i] == '\0')
-		return (1);
-	while (str[i])
-	{
-		while (str[i + y] == cmp[y] && str[i + y] && cmp[y])
-			y++;
-		if (cmp[y] == '\0' && str[i + y] == '\0')
-			return (1);
-		else
-			y = 0;
-		i++;
-	}
-	return (0);
 }
